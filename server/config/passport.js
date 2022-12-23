@@ -17,7 +17,7 @@ module.exports = function (passport) {
         //Get client ID and Secret from discord developer portal
         clientID: process.env.DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        callbackURL: "/auth/discord/callback",
+        callbackURL: "http://localhost:3000/auth/discord/callback",
         // pulls discord username without email, and returns basic information about all the user's current guilds / servers.
         scope: ["identify", "guilds"],
       },
@@ -31,11 +31,12 @@ module.exports = function (passport) {
           return cb(null, false, {
             msg: "You must be a member of the 100Devs Discord to use this application",
           });
-        
+
         // Check if user exists in DB
         let user = await User.findById(profile.id).exec();
 
         try {
+          console.log(`finding user`);
           // Create user if it doesn't exist
           if (!user) {
             user = await User.create({

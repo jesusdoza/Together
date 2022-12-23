@@ -52,7 +52,7 @@ app.use("/", mainRoutes);
 app.use("/events", eventsRoutes);
 app.get("'", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-})
+});
 
 //Connect To Database
 connectDB().then(() => {

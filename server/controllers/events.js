@@ -31,6 +31,7 @@ module.exports = {
     try {
       const events = await Event.find();
       // return all events
+      console.log("returned all events");
       res.json(events);
     } catch (err) {
       console.log(err);
